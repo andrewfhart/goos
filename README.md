@@ -1,7 +1,11 @@
 goos
 ====
 
-An experiment with developing low-level Operating System and Bootloader code.
+An experiment with developing low-level Operating System and Bootloader code. 
+
+The GOOS OS is a project that arose in early 2006 out of a desire to learn more about low-level Operating Systems concepts than was taught at the university undergraduate level. For reasons of time, topics such as CPU Scheduling, Thread Synchronization, System Calls, and Virtual Memory, were taught without laying the foundation of how the operating system actually interfaced with the hardware immediately below it. This crucial layer of system code was never explored.
+
+GOOS is a hobby Operating System for the PC written in C and 32-bit x86 Assembly that provided me with a platform for exploring the rabbit hole(s) of low-level operating system development. Additional information about the project is still available at [the project's original website](http://crawwler.com/goos/).
 
 
 Booting GOOS
@@ -17,7 +21,8 @@ The following provides a summarization of the steps necessary to load the GOOS k
 4. Kernel Entry Stub
 
 ### Section 1: Overview
-	The GOOS kernel comes off the disk and into main memory in three stages. Each stage prepares the way for the ones that follow. The rationale behind dividing the task into three stages is two-fold. Firstly, floppy disk sectors are only 512 bytes long and the BIOS, as the last step in its start-up procedure, loads only one sector (see Section 2 for more details). Thus, to begin with, we have just 512 bytes loaded into main memory. Considering the relative simplicity of the tasks performed by the boot code, this might in fact be enough. However, because this is an educational OS, I wanted to be able to get as much feedback from the boot code as possible. As a result, the boot code is verbose, often printing messages to the console. These ASCII strings take up a large amount of space (one byte per character) making the boot code spill over into a second disk sector. The two stages, written in x86 assembly (Intel flavor), together load the kernel and prepare the machine for kernel entry as described in Sections 2 and 3. The kernel entry stub is the first bit of “kernel” code executed. Its job is explained in Section 4.
+
+The GOOS kernel comes off the disk and into main memory in three stages. Each stage prepares the way for the ones that follow. The rationale behind dividing the task into three stages is two-fold. Firstly, floppy disk sectors are only 512 bytes long and the BIOS, as the last step in its start-up procedure, loads only one sector (see Section 2 for more details). Thus, to begin with, we have just 512 bytes loaded into main memory. Considering the relative simplicity of the tasks performed by the boot code, this might in fact be enough. However, because this is an educational OS, I wanted to be able to get as much feedback from the boot code as possible. As a result, the boot code is verbose, often printing messages to the console. These ASCII strings take up a large amount of space (one byte per character) making the boot code spill over into a second disk sector. The two stages, written in x86 assembly (Intel flavor), together load the kernel and prepare the machine for kernel entry as described in Sections 2 and 3. The kernel entry stub is the first bit of “kernel” code executed. Its job is explained in Section 4.
 
 ### Section 2: Stage One
 
